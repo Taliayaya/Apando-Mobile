@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Apando",
+    "slug": "Apando",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
