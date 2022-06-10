@@ -21,7 +21,7 @@ const Field = ({ fieldName, field, error, control }) => {
                 name={fieldName}
                 rules={{ required: true }}
             />
-            <Text>{error}</Text>
+            <Text style={styles.error}>{error}</Text>
         </View>
     );
 };

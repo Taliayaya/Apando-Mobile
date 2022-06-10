@@ -4,20 +4,19 @@ const styles = StyleSheet.create({
     input: {
         width: 300,
         height: 40,
-        borderRadius: 20,
         paddingHorizontal: 5,
         marginBottom: 5,
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        fontSize: 17,
+        paddingLeft: 15,
     },
     inputContainer: {
         marginBottom: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
+    },
+    error: {
+        textAlign: 'center',
+        height: 17.5,
     },
 });
 
