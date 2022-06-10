@@ -15,11 +15,12 @@ export default () => {
     } = useForm({
         defaultValues: {
             firstName: '',
-            lastName: '',
+            email: '',
+            password: '',
         },
     });
     const onSubmit = (data) => {
-        console.log(data);
+        Alert.alert('Logged', 'hello');
     };
 
     console.log('errors', errors);
