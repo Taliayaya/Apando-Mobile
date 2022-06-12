@@ -5,6 +5,10 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "plugins": ["@react-native-google-signin/google-signin"],
+    "android": {
+      "googleServicesFile": "./google-services.json"
+    }
   }
 }
