@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1042949035924",
+    "firebase_url": "https://pando-5ec96-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pando-5ec96",
+    "storage_bucket": "pando-5ec96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042949035924:android:8a48d306ba9d93a2d72181",
+        "android_client_info": {
+          "package_name": "com.apando"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042949035924-lf11mi6spv40hb0apgq3m0b685k23enb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apando",
+            "certificate_hash": "ccff8ec461829afe040eb6db2634d29419843bfa"
+          }
+        },
+        {
+          "client_id": "1042949035924-4bqk7g6lerqfn32i04806gjhibn7she2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANIt8UXLZ5EsSFZMb0v0Ik0qvib_H0zcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042949035924-4bqk7g6lerqfn32i04806gjhibn7she2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
