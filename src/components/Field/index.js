@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
-import { TextInput, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { styles } from './FieldStyle';
+import { TextInput } from 'react-native-paper';
 
 const Field = ({ fieldName, field, error, control }) => {
+    const isPasswordInput = field?.secureTextEntry;
+    const [visible, setVisible] = useState(false);
+
     return (
         <View style={styles.inputContainer}>
-            <Text>{field.label}</Text>
             <Controller
                 control={control}
                 render={({ field: { onChange, onBlur, value } }) => (
@@ -15,7 +18,17 @@ const Field = ({ fieldName, field, error, control }) => {
                         onChangeText={(value) => onChange(value)}
                         value={value}
                         style={styles.input}
+                        right={
+                            isPasswordInput && (
+                                <TextInput.Icon
+                                    name={visible ? 'eye-off' : 'eye'}
+                                    onPress={() => setVisible(!visible)}
+                                />
+                            )
+                        }
                         {...field}
+                        secureTextEntry={visible}
+                        mode="outlined"
                     />
                 )}
                 name={fieldName}
