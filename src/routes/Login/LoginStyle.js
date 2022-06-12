@@ -7,6 +7,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 15,
     },
+    button: {
+        justifyContent: 'center',
+        alignSelf: 'center',
+        color: 'blue',
+        fontWeight: '600',
+        fontSize: 15,
+        marginTop: 50,
+    },
 });
 
 export { styles };
