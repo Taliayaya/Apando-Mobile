@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Login from './src/routes/Login';
+import SignUp from './src/routes/SignUp';
 
 function HomeScreen({ navigation }) {
     return (
@@ -42,6 +43,7 @@ export default function App() {
                 />
                 <Stack.Screen name="Details" component={DetailsScreen} />
                 <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="SignUp" component={SignUp} />
             </Stack.Navigator>
         </NavigationContainer>
     );
