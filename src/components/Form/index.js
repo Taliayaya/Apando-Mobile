@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Button, Animated } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { SafeAreaView, Text, Button, Animated } from 'react-native';
 import Field from '../Field';
 import SubmitButton from '../SubmitButton';
 import { styles } from './FormStyle';
@@ -12,31 +12,42 @@ const Form = ({
     buttonText,
     submit,
 }) => {
-    const { errorMessage, setErrorMessage } = useState('');
-    const [opacity] = useState(new Animated.Value(1));
+    const [errorMessage, setErrorMessage] = useState('');
+    const fadeAnim = useRef(new Animated.Value(1)).current;
+
+    const fadeIn = () => {
+        // Will change fadeAnim value to 1 in 5 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: false,
+        }).start();
+    };
 
     const fadeOut = () => {
-        Animated.timing(opacity, { toValue: 0.2, duration: 200 }).start();
-    };
-    const fadeIn = () => {
-        Animated.timing(opacity, { toValue: 1, duration: 200 }).start();
+        // Will change fadeAnim value to 0 in 3 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 0.2,
+            duration: 500,
+            useNativeDriver: false,
+        }).start();
     };
 
     const handleSubmit = async () => {
         setErrorMessage('');
         fadeOut();
         try {
-            submit().then;
-            fadeIn();
+            submit();
         } catch (e) {
-            setErrorMessage(e.message);
-            fadeIn();
+            setErrorMessage(e);
+        } finally {
+            setTimeout(fadeIn, 500);
         }
     };
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.error}>{errorMessage}</Text>
-            <Animated.View style={{ opacity }}>
+            <Animated.View style={[{ opacity: fadeAnim }]}>
                 {fieldKeys.map((key) => {
                     return (
                         <Field
@@ -50,7 +61,7 @@ const Form = ({
                 })}
             </Animated.View>
             <SubmitButton title={buttonText} onPress={handleSubmit} />
-        </View>
+        </SafeAreaView>
     );
 };
 
