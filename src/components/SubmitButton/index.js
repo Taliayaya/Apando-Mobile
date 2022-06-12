@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
-import { Pressable, Text, StyleSheet, Animated } from 'react-native';
+import React, { useRef } from 'react';
+import {
+    Text,
+    StyleSheet,
+    Animated,
+    TouchableWithoutFeedback,
+} from 'react-native';
 
 const SubmitButton = ({ title, onPress }) => {
-    const [offset] = useState(new Animated.Value(1));
-    const [scale] = useState(new Animated.Value(1));
+    const offset = useRef(new Animated.Value(1)).current;
+    const scale = useRef(new Animated.Value(1)).current;
 
     const handlePress = async () => {
         Animated.spring(offset, {
             toValue: 5,
             useNativeDriver: true,
+            duration: 150,
         }).start();
         Animated.spring(scale, {
             toValue: 0.96,
             useNativeDriver: true,
         }).start();
-        await onPress();
+        setTimeout(onPress, 500);
+    };
+
+    const handlePressOut = () => {
         Animated.spring(offset, {
             toValue: 0,
             useNativeDriver: true,
+            duration: 150,
         }).start();
         Animated.spring(scale, {
             toValue: 1,
@@ -32,11 +42,14 @@ const SubmitButton = ({ title, onPress }) => {
     ];
 
     return (
-        <Pressable onPressIn={handlePress}>
-            <Animated.View style={{ transform, ...styles.container }}>
+        <TouchableWithoutFeedback
+            onPressIn={handlePress}
+            onPressOut={handlePressOut}
+        >
+            <Animated.View style={[styles.container, { transform }]}>
                 <Text style={styles.text}>{title}</Text>
             </Animated.View>
-        </Pressable>
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -52,7 +65,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
         width: 250,
         elevation: 4,
-        borderRadius: 8,
+        borderRadius: 30,
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
