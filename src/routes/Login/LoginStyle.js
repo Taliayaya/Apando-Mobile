@@ -6,14 +6,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 15,
+        flexDirection: 'column',
     },
     button: {
         justifyContent: 'center',
-        alignSelf: 'center',
         color: 'blue',
         fontWeight: '600',
         fontSize: 15,
-        marginTop: 50,
+        margin: 50,
+        marginBottom: 100,
     },
 });
 

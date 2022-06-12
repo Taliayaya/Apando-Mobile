@@ -1,22 +1,16 @@
 import * as React from 'react';
-import { ScrollView, Text, Alert, Button } from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
+import { Text, View } from 'react-native';
+import { useForm } from 'react-hook-form';
 import { styles } from './LoginStyle';
 import Form from '../../components/Form';
 import auth from '@react-native-firebase/auth';
 import { onGoogleButtonPress } from '../../utils/googleApi';
-import {
-    GoogleSignin,
-    GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 export default ({ navigation }) => {
     const {
-        register,
-        setValue,
         handleSubmit,
         control,
-        reset,
         formState: { errors },
     } = useForm({
         defaultValues: {
@@ -42,7 +36,6 @@ export default ({ navigation }) => {
     };
 
     const onSubmitGoogle = () => {
-        console.log('user : ', user);
         onGoogleButtonPress().then((User) => {
             console.log(User);
         });
@@ -76,27 +69,34 @@ export default ({ navigation }) => {
     }, []);
 
     return (
-        <ScrollView contentcontainerStyle={styles.container}>
-            <Form
-                control={control}
-                buttonText="Valider"
-                submit={handleSubmit(onSubmit)}
-                fields={fields}
-                fieldKeys={fieldKeys}
-                validationErrors={validationErrors}
-            />
-            <GoogleSigninButton
-                style={{ alignSelf: 'center' }}
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Dark}
-                onPress={onSubmitGoogle}
-            />
-            <Text
-                onPress={() => navigation.navigate('SignUp')}
-                style={styles.button}
-            >
-                Nouveau ? S'inscrire
-            </Text>
-        </ScrollView>
+        <View style={styles.container}>
+            <View>
+                <Form
+                    control={control}
+                    buttonText="Valider"
+                    submit={handleSubmit(onSubmit)}
+                    fields={fields}
+                    fieldKeys={fieldKeys}
+                    validationErrors={validationErrors}
+                />
+                <GoogleSigninButton
+                    style={{ alignSelf: 'center' }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={onSubmitGoogle}
+                />
+            </View>
+            <View style={styles.button}>
+                <Text>
+                    Nouveau ?{' '}
+                    <Text
+                        onPress={() => navigation.navigate('SignUp')}
+                        style={styles.button}
+                    >
+                        S'inscrire
+                    </Text>
+                </Text>
+            </View>
+        </View>
     );
 };

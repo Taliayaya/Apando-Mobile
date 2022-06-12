@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { ScrollView, Text, Alert } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { styles } from '../Login/LoginStyle';
 import Form from '../../components/Form';
+import { onGoogleButtonPress } from '../../utils/googleApi';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 export default ({ navigation }) => {
     const {
@@ -19,6 +21,12 @@ export default ({ navigation }) => {
             password: '',
         },
     });
+
+    const onSubmitGoogle = () => {
+        onGoogleButtonPress().then((User) => {
+            console.log(User);
+        });
+    };
     const onSubmit = (data) => {
         Alert.alert('Logged', 'hello');
     };
@@ -45,22 +53,35 @@ export default ({ navigation }) => {
     };
 
     return (
-        <ScrollView contentcontainerStyle={styles.container}>
-            <Form
-                control={control}
-                buttonText="Valider"
-                submit={handleSubmit(onSubmit)}
-                fields={fields}
-                fieldKeys={fieldKeys}
-                validationErrors={validationErrors}
-            />
+        <View style={styles.container}>
+            <View>
+                <Form
+                    control={control}
+                    buttonText="Valider"
+                    submit={handleSubmit(onSubmit)}
+                    fields={fields}
+                    fieldKeys={fieldKeys}
+                    validationErrors={validationErrors}
+                />
+                <GoogleSigninButton
+                    style={{ alignSelf: 'center' }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={onSubmitGoogle}
+                />
+            </View>
 
-            <Text
-                onPress={() => navigation.navigate('Login')}
-                style={styles.button}
-            >
-                Déjà inscrit ? Se connecter
-            </Text>
-        </ScrollView>
+            <View style={styles.button}>
+                <Text>
+                    Déjà inscrit ?{' '}
+                    <Text
+                        onPress={() => navigation.navigate('Login')}
+                        style={styles.button}
+                    >
+                        Se connecter
+                    </Text>
+                </Text>
+            </View>
+        </View>
     );
 };
