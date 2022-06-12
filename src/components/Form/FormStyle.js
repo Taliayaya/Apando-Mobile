@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 15,
+        alignSelf: 'center',
     },
     error: {
         marginBottom: 20,
