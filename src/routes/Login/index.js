@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ScrollView, Button, Alert } from 'react-native';
+import { ScrollView, Text, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { styles } from './LoginStyle';
 import Form from '../../components/Form';
+import auth from '@react-native-firebase/auth';
 
-export default () => {
+export default ({ navigation }) => {
     const {
         register,
         setValue,
@@ -14,32 +15,35 @@ export default () => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            firstName: '',
             email: '',
             password: '',
         },
     });
     const onSubmit = (data) => {
-        Alert.alert('Logged', 'hello');
+        if (!data.email.trim() && !data.password.trim()) {
+            console.log('Failed');
+            return;
+        }
+        auth()
+            .signInWithEmailAndPassword()
+            .then((user) => console.log(user))
+            .catch((error) => {
+                console.log(error.code);
+            });
     };
 
-    console.log('errors', errors);
     const fields = {
-        firstName: {
-            label: 'First Name',
-        },
         email: {
-            label: 'Email',
+            label: 'Adresse Mail',
             keyboardType: 'email-address',
         },
         password: {
-            label: 'Password',
+            label: 'Mot de Passe',
             secureTextEntry: true,
         },
     };
-    const fieldKeys = ['firstName', 'email', 'password'];
+    const fieldKeys = ['email', 'password'];
     const validationErrors = {
-        firstName: 'Ce champs est requis',
         email: 'Ce champs est requis',
         password: 'Ce champs est requis',
     };
@@ -54,6 +58,13 @@ export default () => {
                 fieldKeys={fieldKeys}
                 validationErrors={validationErrors}
             />
+
+            <Text
+                onPress={() => navigation.navigate('SignUp')}
+                style={styles.button}
+            >
+                Nouveau ? S'inscrire
+            </Text>
         </ScrollView>
     );
 };
