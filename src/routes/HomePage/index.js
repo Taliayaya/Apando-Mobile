@@ -10,6 +10,10 @@ export default ({ navigation }) => {
                 title="Go to Login"
                 onPress={() => navigation.navigate('Login')}
             />
+            <Button
+                title="Go to App"
+                onPress={() => navigation.navigate('App')}
+            />
         </View>
     );
 };

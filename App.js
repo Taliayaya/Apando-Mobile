@@ -5,6 +5,7 @@ import React from 'react';
 import HomePage from './src/routes/HomePage';
 import Login from './src/routes/Login';
 import SignUp from './src/routes/SignUp';
+import MainApp from './src/routes/App';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
                     component={SignUp}
                     options={{ title: 'Inscription' }}
                 />
+                <Stack.Screen name="App" component={MainApp} />
             </Stack.Navigator>
         </NavigationContainer>
     );
