@@ -2,10 +2,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+
+// Custom Routes / Components
 import HomePage from './src/routes/HomePage';
 import Login from './src/routes/Login';
 import SignUp from './src/routes/SignUp';
 import MainApp from './src/routes/App';
+
+// Providers
 import { ChatProvider } from './src/utils/context/ChatContext';
 
 const Stack = createNativeStackNavigator();
