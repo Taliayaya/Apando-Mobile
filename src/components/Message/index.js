@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Alert } from 'react-native';
+import { Text, View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-paper';
+import Markdown, { MarkdownIt } from 'react-native-markdown-display';
+import math from 'markdown-it-new-katex';
+import katex from 'katex';
+
+const markdownItInstance = MarkdownIt().use(math, {
+    engine: katex,
+    delimiters: 'dollars',
+});
 
 export default ({ message, username, timestamp, repeat }) => {
     const padding = repeat ? styles.repeat : styles.noRepeat;
@@ -30,7 +38,23 @@ export default ({ message, username, timestamp, repeat }) => {
                             <Text style={styles.timestamp}>{timestamp}</Text>
                         </Text>
                     )}
-                    <Text>{message}</Text>
+                    <Markdown
+                        debugPrintTree
+                        markdownit={markdownItInstance}
+                        rules={{
+                            math_block: (node, children, parent, styles) => {
+                                console.log(node, children, parent, styles);
+                                return (
+                                    <Text key={node.key}>
+                                        Math Expression Not Yet Supported on
+                                        Mobile
+                                    </Text>
+                                );
+                            },
+                        }}
+                    >
+                        {message}
+                    </Markdown>
                 </View>
             </View>
         </View>
